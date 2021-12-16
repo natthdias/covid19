@@ -5,22 +5,32 @@ import  {Wrapper} from '../getCases/getCases.style'
 import SelectBox from '../SelectBox/SelectBox'
 
 const GetCases = () => {
-    const [response, setResponse] = useState([])
+    const [response, setResponse] = useState()
+    const [selectState, setSelectState] = useState('Todos');
+    const [url, setUrl] = useState('')
     useEffect(() => {
-      api.get().then(res => setResponse(res.data))
-    }, [])
-    console.log(response)
+        if(selectState !== 'Todos'){ 
+            setUrl(`brazil/uf/${selectState}`)
+        } else {
+            setUrl('')
+        }
+      api.get(url).then(res => setResponse(Array.isArray(res) ? res.data.data : res.data))
+    }, [selectState, url])
+
     return (
-        <Wrapper>
-            <SelectBox />
+        response ? (
+            <Wrapper>
+            <SelectBox setResponse={setResponse} selectState={selectState} setSelectState={setSelectState} url={url} />
             {
-                //response.map(item => (             
-                    <InputDetails info={response}/>
-                //))
+                Array.isArray(response) ? response.map(item => (
+                    <InputDetails info={item}/>   
+               ))
+                : <InputDetails info={response}/>    
             }
         </Wrapper>
-       
+        ) : 'Só lamento'
     )
 }
 
 export default GetCases
+//FRANKLIN DESCULPA !

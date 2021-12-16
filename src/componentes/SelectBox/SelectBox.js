@@ -4,8 +4,10 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import api from '../../services/api'
 
 const states = [
+  { value: 'Todos', label: 'Todos' },
   { value: 'AC', label: 'Acre' },
   { value: 'AL', label: 'Alagoas' },
   { value: 'AP', label: 'Amapá' },
@@ -35,9 +37,7 @@ const states = [
   { value: 'TO', label: 'Tocantins' },
 ]
 
-export default function SelectBox() {
-  const [selectState, setSelectState] = useState('');
-
+export default function SelectBox({selectState, setSelectState }) {
   const handleChange = (event) => {
     setSelectState(event.target.value);
   };

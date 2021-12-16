@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
  const InputDetails = ({info}) => {
   const classes = useStyles();
- console.log(info.state)
+console.log(info.cases)
   return (
       <form className={classes.root} noValidate autoComplete="off">
         <div>
